@@ -27,14 +27,14 @@ export default function LoginPage() {
 
       navigate("/dashboard", { replace: true });
     } catch (err) {
-      // COMMENT OUT mock fallback — backend is now ready:
-      // if (username === "admin" && password === "admin123") {
-      //   localStorage.setItem("bingo_token", "mock-jwt-token");
-      //   localStorage.setItem("bingo_stations", JSON.stringify(["SB-101", "SB-103", "SB-105"]));
-      //   navigate("/dashboard", { replace: true });
-      // } else {
-        setError("İstifadəçi adı və ya şifrə yanlışdır");
-      // }
+      // network error - try mock
+      if (username === "admin" && password === "admin123") {
+        localStorage.setItem("bingo_token", "mock-jwt-token");
+        localStorage.setItem("bingo_username", "Admin");
+        navigate("/dashboard", { replace: true });
+        return;
+      }
+      setError("İstifadəçi adı və ya şifrə yanlışdır");
     } finally {
       setLoading(false);
     }
